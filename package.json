@@ -2,8 +2,13 @@
   "name": "pitch5",
   "version": "1.0.0",
   "private": true,
-  "description": "5v5 indoor soccer tactics board (static site, no build step)",
+  "description": "5v5 indoor soccer tactics board (static site)",
   "scripts": {
-    "dev": "python3 -m http.server 8000"
+    "dev": "python3 -m http.server 8000",
+    "build": "node build.mjs",
+    "preview": "python3 -m http.server 8000 --directory dist"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2"
   }
 }

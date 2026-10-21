@@ -1,0 +1,10 @@
+# Netlify runs the build and publishes dist/ (overrides the build settings in the Netlify UI).
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# Hashed bundle filenames change on every code change, so they can be cached forever.
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
