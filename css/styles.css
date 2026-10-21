@@ -22,8 +22,19 @@ main { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 4fr); gap:
 /* Pitch */
 .pitch-wrap { padding: 12px; }
 #pitch { display: block; width: 100%; height: auto; max-height: 76vh; margin: 0 auto; touch-action: none;
-  user-select: none; -webkit-user-select: none; border-radius: 8px; }
-@media (max-width: 900px) { #pitch { max-height: none; max-width: 480px; } }
+  user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent; border-radius: 8px; }
+/* Phones: keep the pitch and the control bar on screen together; the bar sticks to the bottom while scrolling. */
+@media (max-width: 900px) {
+  header span { display: none; }
+  #pitch { max-width: 480px; max-height: calc(100vh - 260px); max-height: calc(100svh - 260px); min-height: 300px; }
+  .controls { gap: 6px; padding: 8px 12px; }
+  .controls .sep { display: none; }
+  .controls .group { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; width: 100%; }
+  .controls .btn { justify-content: center; padding: 0 6px; font-size: 14px; line-height: 1.15; text-align: center; }
+  .controls { position: sticky; bottom: 0; z-index: 5; background: var(--panel); border-radius: 0 0 12px 12px; padding-bottom: max(8px, env(safe-area-inset-bottom)); }
+}
+/* touch-action is set on the draggables too: Safari does not reliably honour it from the <svg> root alone. */
+.token, #ball { touch-action: none; -webkit-touch-callout: none; }
 .token { cursor: grab; }
 .token.dragging { cursor: grabbing; }
 .token .body { stroke: #fff; stroke-width: .5; }

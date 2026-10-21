@@ -44,7 +44,7 @@ export function initInput() {
       drag = { kind: 'player', slot: i, el: tok, dx: p.x - pos.x, dy: p.y - pos.y, moved: false, sx: pos.x, sy: pos.y };
       tok.classList.add('dragging');
     }
-    svg.setPointerCapture(e.pointerId);
+    try { svg.setPointerCapture(e.pointerId); } catch (err) { /* touch pointers are captured implicitly */ }
     e.preventDefault();
     render(); syncUI();
   });
@@ -58,6 +58,12 @@ export function initInput() {
     else { state.players[drag.slot].x = nx; state.players[drag.slot].y = ny; }
     render();
   });
+
+  // iOS Safari can treat a touch on an SVG child as a page scroll and cancel the pointer stream even with
+  // touch-action: none, so also block the native touch default while a token/ball is being grabbed.
+  const onDraggable = e => e.target.closest && e.target.closest('[data-slot], [data-ball]');
+  svg.addEventListener('touchstart', e => { if (!isPlaying() && onDraggable(e)) e.preventDefault(); }, { passive: false });
+  svg.addEventListener('touchmove', e => { if (drag) e.preventDefault(); }, { passive: false });
 
   svg.addEventListener('pointerup', endDrag);
   svg.addEventListener('pointercancel', endDrag);
