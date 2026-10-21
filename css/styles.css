@@ -68,13 +68,12 @@ select.btn { padding-right: 8px; }
 .chip { padding: 2px 8px; border-radius: 999px; background: var(--panel-2); border: 1px solid var(--line); font-size: 12px; }
 
 /* Roster */
-.row { display: grid; grid-template-columns: 88px 56px minmax(0, 1fr) auto; gap: 6px; align-items: center; margin-bottom: 6px;
+.row { display: grid; grid-template-columns: 88px minmax(0, 1fr) auto; gap: 6px; align-items: center; margin-bottom: 6px;
   padding: 4px; border-radius: 8px; }
 .row.selectable { outline: 1px dashed var(--amber); cursor: pointer; }
 .row.picked { background: rgba(245, 158, 11, .15); }
 .row .role { font-size: 12px; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .row input { min-width: 0; min-height: 36px; padding: 0 8px; background: var(--bg); border: 1px solid var(--line); border-radius: 6px; }
-.row input.num { text-align: center; }
 .row .btn { min-height: 36px; padding: 0 10px; }
 #rosterMsg { min-height: 20px; font-size: 13px; color: var(--amber); margin: 4px 0 8px; }
 .hint { font-size: 13px; color: var(--amber); margin: 0 0 8px; }

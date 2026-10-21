@@ -78,14 +78,14 @@ export const ES_FORMATIONS = {
 export const FORMATIONS = [
   {
     id: 'diamond', name: '1-2-1 Diamond (Futsal Classic)',
-    roles: ['Goalkeeper', 'Fixo (Anchor)', 'Ala Left', 'Ala Right', 'Pivot'],
-    tags: ['GK', 'FIX', 'ALA', 'ALA', 'PIV'],
+    roles: ['Goalkeeper', 'Anchor (Fixo)', 'Left Wing', 'Right Wing', 'Pivot'],
+    tags: ['GK', 'ANC', 'LW', 'RW', 'PIV'],
     overview: 'Classic futsal rhombus that stretches the pitch and creates passing triangles.',
     pros: ['Width and depth', 'Natural passing triangles', 'Frequent 1v1 situations'],
-    cons: ['Central gap if wings overcommit', 'Lone Fixo is exposed on quick turnovers'],
-    responsibilities: ['Fixo sets tempo and covers behind', 'Alas provide width and overlap', 'Pivot pins the last defender'],
+    cons: ['Central gap if wings overcommit', 'Lone Anchor is exposed on quick turnovers'],
+    responsibilities: ['Anchor sets tempo and covers behind', 'Wings provide width and overlap', 'Pivot pins the last defender'],
     phases: [
-      { pos: [[50,92],[50,72],[22,55],[78,55],[50,28]], pass: [0,1,2,4], text: 'Fixo splits with the GK, Alas drop deep, Pivot stays high to pin the defender.' },
+      { pos: [[50,92],[50,72],[22,55],[78,55],[50,28]], pass: [0,1,2,4], text: 'Anchor splits with the GK, Wings drop deep, Pivot stays high to pin the defender.' },
       { pos: [[50,80],[50,56],[34,32],[76,30],[50,16]], pass: [1,4,3], text: 'Wing overlaps inside; Pivot receives back to goal and lays off for the third-man run.' },
       { pos: [[50,92],[50,78],[30,66],[70,66],[50,52]], pass: [], text: 'Compact diamond funnelling play wide.' }
     ]

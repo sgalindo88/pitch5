@@ -40,7 +40,6 @@ export function refPos(r) {
   if (r.t === 'g') return { x: GHOSTS[r.i][0], y: GHOSTS[r.i][1] };
   return r;
 }
-const surname = n => n.trim().split(/\s+/).pop();
 
 function renderTokens() {
   const f = F();
@@ -48,12 +47,12 @@ function renderTokens() {
   for (let i = 0; i < 5; i++) {
     const tok = toks[i], p = state.players[i], v = toVB(p), pl = playerAt(i);
     tok.setAttribute('transform', `translate(${v.X.toFixed(2)} ${v.Y.toFixed(2)})`);
-    const nm = surname(pl.name), num = String(pl.number), tag = f.tags[i];
+    const nm = pl.name, ini = pl.name.trim().charAt(0).toUpperCase(), tag = f.tags[i];
     const [numEl, nmEl, rlEl] = tok.querySelectorAll('text');
-    if (numEl.textContent !== num) numEl.textContent = num;
+    if (numEl.textContent !== ini) numEl.textContent = ini;
     if (nmEl.textContent !== nm) nmEl.textContent = nm;
     if (rlEl.textContent !== tag) rlEl.textContent = tag;
-    const label = t('tokenAria', { name: pl.name, num: pl.number, role: f.roles[i] });
+    const label = t('tokenAria', { name: pl.name, role: f.roles[i] });
     if (tok.getAttribute('aria-label') !== label) tok.setAttribute('aria-label', label);
   }
 }

@@ -1,12 +1,12 @@
-// Preset roster: ids 1-10; onPitch[0] is the GK.
+// Preset roster: ids 1-10; onPitch[0] is the GK. `pos` is the player's preferred position (GK, DEF, MID, FW).
 export const PRESET_ROSTER = {
   onPitch: [1, 2, 3, 4, 5],
   bench: [6, 7, 8, 9, 10],
   byId: {
-    1: { name: 'G. Silva', number: 1 },  2: { name: 'M. Ramos', number: 4 },
-    3: { name: 'L. Santos', number: 7 }, 4: { name: 'D. Costa', number: 10 },
-    5: { name: 'R. Alves', number: 9 },  6: { name: 'T. Lima', number: 12 },
-    7: { name: 'A. Pires', number: 5 },  8: { name: 'J. Moura', number: 8 },
-    9: { name: 'P. Rocha', number: 11 }, 10: { name: 'F. Neves', number: 14 }
+    1: { name: 'Daniel', pos: 'GK' },    2: { name: 'Oscar', pos: 'DEF' },
+    3: { name: 'Sebastian', pos: 'DEF' }, 4: { name: 'Danilo', pos: 'MID' },
+    5: { name: 'Juanes', pos: 'FW' },     6: { name: 'Edward', pos: 'DEF' },
+    7: { name: 'Juan C', pos: 'MID' },    8: { name: 'Paul', pos: 'MID' },
+    9: { name: 'Angel', pos: 'MID' },     10: { name: 'David', pos: 'FW' }
   }
 };
