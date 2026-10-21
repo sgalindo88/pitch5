@@ -1,9 +1,9 @@
 // UI strings. Formation content is translated in data/formations.js (ES_FORMATIONS).
 export const STR = {
 en: {
-  title: 'Pitch5 — 5v5 Tactics Board', subtitle: '5v5 Tactics Board · Drag players and ball. Pick a phase or press Play.',
+  title: 'Pitch5 — 5v5 Tactical Intelligence & Board', subtitle: '5v5 Tactical Intelligence & Board',
   pitchLabel: 'Tactical pitch', pitchAria: 'Indoor soccer pitch, our team attacking up', panelLabel: 'Tactical panel',
-  tabFormation: 'Formation', tabRoster: 'Roster', tabGuide: 'Phase Guide',
+  tactics: 'Tactics', close: 'Close', tabFormation: 'Formation', tabRoster: 'Roster', tabGuide: 'Phase Guide',
   phasesLabel: 'Phases', ph0: 'Build-up', ph1: 'Attack', ph2: 'Defensive Shape',
   play: 'Play', pause: 'Pause', reset: 'Reset', grid: 'Grid', snap: 'Snap', speed: 'Playback speed',
   langBtn: 'Español', langAria: 'Cambiar a español',
@@ -17,9 +17,9 @@ en: {
   nameAria: 'Name, {label}', tokenAria: '{name}, {role}'
 },
 es: {
-  title: 'Pitch5 — Pizarra Táctica 5v5', subtitle: 'Pizarra Táctica 5v5 · Arrastra jugadores y balón. Elige una fase o pulsa Reproducir.',
+  title: 'Pitch5 — Inteligencia Táctica y Pizarra 5v5', subtitle: 'Inteligencia Táctica y Pizarra 5v5',
   pitchLabel: 'Cancha táctica', pitchAria: 'Cancha de fútbol sala, nuestro equipo ataca hacia arriba', panelLabel: 'Panel táctico',
-  tabFormation: 'Formación', tabRoster: 'Plantel', tabGuide: 'Guía de Fases',
+  tactics: 'Tácticas', close: 'Cerrar', tabFormation: 'Formación', tabRoster: 'Plantel', tabGuide: 'Guía de Fases',
   phasesLabel: 'Fases', ph0: 'Salida', ph1: 'Ataque', ph2: 'Forma Defensiva',
   play: 'Reproducir', pause: 'Pausa', reset: 'Reiniciar', grid: 'Cuadrícula', snap: 'Imán', speed: 'Velocidad de reproducción',
   langBtn: 'English', langAria: 'Switch to English',

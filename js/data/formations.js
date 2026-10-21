@@ -164,3 +164,9 @@ export const FORMATIONS = [
 // Ghost attackers (shown in the Defensive Shape phase only) and their ball path.
 export const GHOSTS = [[50,40],[22,48],[78,48],[50,24]];
 export const GHOST_PASS = [3,0,1];
+
+// Short labels for the formation pill grid.
+export const SHORT_NAMES = {
+  en: { diamond: '1-2-1 Diamond', box: '2-2 Box', pyramid: '3-1 Wall', aggressive: '1-1-2 Attack', compact: '2-1-1 Compact', roaming: '1-3 Roaming' },
+  es: { diamond: '1-2-1 Rombo', box: '2-2 Caja', pyramid: '3-1 Muro', aggressive: '1-1-2 Ataque', compact: '2-1-1 Compacta', roaming: '1-3 Móvil' }
+};

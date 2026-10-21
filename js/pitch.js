@@ -9,8 +9,9 @@ export const svg = $('pitch');
 
 export function buildStatic() {
   const turf = $('turf');
-  for (let i = 0; i < 8; i++) {
-    el('rect', { x: 6, y: 10 + i * 17.5, width: 88, height: 17.5, fill: i % 2 ? '#166534' : '#15803d' }, turf);
+  el('rect', { x: 6, y: 10, width: 88, height: 140, fill: 'url(#turfGrad)' }, turf);
+  for (let i = 0; i < 8; i++) { // subtle grass striping
+    el('rect', { x: 6, y: 10 + i * 17.5, width: 88, height: 17.5, fill: i % 2 ? 'rgba(0,0,0,.16)' : 'rgba(255,255,255,.035)' }, turf);
   }
   const grid = $('grid');
   for (let i = 1; i < 10; i++) { const x = PITCH.x0 + i * PITCH.w / 10; el('line', { x1: x, y1: 10, x2: x, y2: 150 }, grid); }
@@ -25,12 +26,14 @@ export function buildTokens() {
   const g = $('tokens');
   g.innerHTML = '';
   for (let i = 0; i < 5; i++) {
-    const tk = el('g', { class: 'token', 'data-slot': i, tabindex: '-1' }, g);
+    const tk = el('g', { class: 'token' + (i === 0 ? ' gk' : ''), 'data-slot': i, tabindex: '-1' }, g);
     el('circle', { class: 'ring', r: 6.4 }, tk);
-    el('circle', { class: 'body', r: 4.5, fill: i === 0 ? '#d97706' : '#2563eb' }, tk);
+    el('circle', { class: 'glow', r: 4.5, filter: 'url(#glow)' }, tk);
+    el('circle', { class: 'body', r: 4.5 }, tk);
     el('text', { class: 'num' }, tk);
-    el('text', { class: 'nm', y: 8.2 }, tk);
-    el('text', { class: 'rl', y: 10.8 }, tk);
+    el('rect', { class: 'pill', y: 6.3, height: 4, rx: 2 }, tk);
+    el('text', { class: 'nm', y: 8.4 }, tk);
+    el('text', { class: 'rl', y: 13 }, tk);
   }
 }
 
@@ -47,10 +50,15 @@ function renderTokens() {
   for (let i = 0; i < 5; i++) {
     const tok = toks[i], p = state.players[i], v = toVB(p), pl = playerAt(i);
     tok.setAttribute('transform', `translate(${v.X.toFixed(2)} ${v.Y.toFixed(2)})`);
-    const nm = pl.name, ini = pl.name.trim().charAt(0).toUpperCase(), tag = f.tags[i];
+    const nm = pl.name, tag = f.tags[i];
+    const ini = i === 0 ? tag : pl.name.trim().charAt(0).toUpperCase(); // GK badge shows its role, others an initial
     const [numEl, nmEl, rlEl] = tok.querySelectorAll('text');
     if (numEl.textContent !== ini) numEl.textContent = ini;
-    if (nmEl.textContent !== nm) nmEl.textContent = nm;
+    if (nmEl.textContent !== nm) {
+      nmEl.textContent = nm;
+      const pill = tok.querySelector('.pill'), w = Math.max(9, nm.length * 1.6 + 3.4);
+      pill.setAttribute('x', (-w / 2).toFixed(2)); pill.setAttribute('width', w.toFixed(2));
+    }
     if (rlEl.textContent !== tag) rlEl.textContent = tag;
     const label = t('tokenAria', { name: pl.name, role: f.roles[i] });
     if (tok.getAttribute('aria-label') !== label) tok.setAttribute('aria-label', label);
@@ -93,7 +101,8 @@ function renderMoves() {
     const a = anim.from[i], b = anim.to[i];
     if (Math.hypot(a.x - b.x, a.y - b.y) <= 2) continue;
     const va = toVB(a), vb = toVB(b);
-    html += `<line x1="${va.X.toFixed(2)}" y1="${va.Y.toFixed(2)}" x2="${vb.X.toFixed(2)}" y2="${vb.Y.toFixed(2)}" opacity="${op.toFixed(2)}"/>`;
+    const dx = vb.X - va.X, dy = vb.Y - va.Y, len = Math.hypot(dx, dy), r = len > 11 ? 5.6 : 0; // stop the arrowhead at the token edge
+    html += `<line x1="${va.X.toFixed(2)}" y1="${va.Y.toFixed(2)}" x2="${(vb.X - dx / len * r).toFixed(2)}" y2="${(vb.Y - dy / len * r).toFixed(2)}" marker-end="url(#runArrow)" opacity="${op.toFixed(2)}"/>`;
   }
   g.innerHTML = html;
 }
