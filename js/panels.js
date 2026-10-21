@@ -37,9 +37,11 @@ export function renderFormationPanel() {
       ${FORMATIONS.map(x => `<button class="pill-btn" type="button" data-formation="${x.id}" aria-pressed="${x.id === f.id}">${esc(names[x.id])}</button>`).join('')}
     </div>
     <h3>${t('overview')}</h3><p style="margin:0">${esc(f.overview)}</p>
-    <h3>${t('positions')}</h3><div class="roles">${f.roles.map(r => `<span class="chip">${esc(r)}</span>`).join('')}</div>
-    <h3>${t('pros')}</h3><ul class="pros">${list(f.pros)}</ul>
-    <h3>${t('cons')}</h3><ul class="cons">${list(f.cons)}</ul>
+    <h3 class="h-pos">${t('positions')}</h3><div class="roles">${f.roles.map(r => `<span class="chip">${esc(r)}</span>`).join('')}</div>
+    <div class="pc">
+      <div><h3>${t('pros')}</h3><ul class="pros">${list(f.pros)}</ul></div>
+      <div><h3>${t('cons')}</h3><ul class="cons">${list(f.cons)}</ul></div>
+    </div>
     <h3>${t('responsibilities')}</h3><ul>${list(f.responsibilities)}</ul>`;
   $('panel-formation').querySelectorAll('[data-formation]').forEach(b => b.addEventListener('click', () => setFormation(b.dataset.formation)));
 }

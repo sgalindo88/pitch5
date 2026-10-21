@@ -51,11 +51,10 @@ function rosterRow(id, label, isBench) {
 export function renderRoster() {
   const r = state.roster, f = F();
   $('panel-roster').innerHTML = `
-    <div id="rosterMsg" role="status" aria-live="polite"></div>
-    ${state.ui.subFrom != null ? `<p class="hint">${t('subHint')}</p>` : ''}
-    <h3>${t('onPitch')}</h3>${r.onPitch.map((id, i) => rosterRow(id, f.roles[i], false)).join('')}
-    <h3>${t('bench')}</h3>${r.bench.map(id => rosterRow(id, t('pos' + r.byId[id].pos), true)).join('')}
-    <div style="margin-top:12px"><button class="btn" id="btnResetRoster" type="button">${t('resetRoster')}</button></div>`;
+    <div class="h-row"><h3>${t('onPitch')}</h3><span id="rosterMsg" role="status" aria-live="polite">${state.ui.subFrom != null ? esc(t('subHint')) : ''}</span></div>
+    ${r.onPitch.map((id, i) => rosterRow(id, f.roles[i], false)).join('')}
+    <div class="h-row"><h3>${t('bench')}</h3><button class="btn small" id="btnResetRoster" type="button">${t('resetRoster')}</button></div>
+    ${r.bench.map(id => rosterRow(id, t('pos' + r.byId[id].pos), true)).join('')}`;
 }
 
 export function initRoster() {

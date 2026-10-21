@@ -7,6 +7,7 @@ import { initRoster } from './roster.js';
 import { initPanels, selectTab } from './panels.js';
 import { initControls, applyLang, syncUI } from './controls.js';
 import { initInput } from './input.js';
+import { initBadgeSpace } from './badge.js';
 
 state.roster = loadRoster();
 setSyncHandler(syncUI);
@@ -19,3 +20,4 @@ initInput();
 selectTab('formation');
 resetPositions();
 applyLang();
+initBadgeSpace();

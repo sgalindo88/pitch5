@@ -3,7 +3,7 @@ import { FORMATIONS, ES_FORMATIONS } from './data/formations.js';
 import { getLang } from './i18n.js';
 
 export const state = {
-  formationId: 'diamond',
+  formationId: 'box',
   phase: 0,
   players: [0, 1, 2, 3, 4].map(() => ({ x: 50, y: 50 })),
   ball: { x: 50, y: 92, att: null, free: false },
