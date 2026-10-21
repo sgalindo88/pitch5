@@ -1,0 +1,9 @@
+{
+  "name": "pitch5",
+  "version": "1.0.0",
+  "private": true,
+  "description": "5v5 indoor soccer tactics board (static site, no build step)",
+  "scripts": {
+    "dev": "python3 -m http.server 8000"
+  }
+}

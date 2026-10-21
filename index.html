@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pitch5 — 5v5 Tactics Board</title>
+<meta name="description" content="Interactive 5v5 indoor soccer / futsal tactics board: formations, phases, roster and substitutions.">
+<meta name="theme-color" content="#0f172a">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<header>
+  <svg class="logo" viewBox="0 0 32 32" width="30" height="30" aria-hidden="true">
+    <rect width="32" height="32" rx="8" fill="#10b981"/>
+    <rect x="6" y="6" width="20" height="20" rx="2" fill="none" stroke="#022c22" stroke-width="1.6"/>
+    <path d="M6 16h20" stroke="#022c22" stroke-width="1.6"/>
+    <text x="16" y="23.5" font-family="Arial, sans-serif" font-weight="700" font-size="15" text-anchor="middle" fill="#022c22">5</text>
+  </svg>
+  <h1>Pitch5</h1>
+  <span data-i18n="subtitle">5v5 Tactics Board · Drag players and ball. Pick a phase or press Play.</span>
+  <button class="btn" id="btnLang" type="button" style="margin-left:auto"></button>
+</header>
+
+<main>
+  <section class="card" data-i18n-aria="pitchLabel" aria-label="Tactical pitch">
+    <div class="pitch-wrap">
+      <svg id="pitch" viewBox="0 0 100 160" preserveAspectRatio="xMidYMid meet" role="img" data-i18n-aria="pitchAria" aria-label="Indoor soccer pitch, our team attacking up">
+        <defs>
+          <marker id="arrow" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="4" markerHeight="4" orient="auto-start-reverse">
+            <path d="M0 0 L6 3 L0 6 z" fill="#fbbf24"/>
+          </marker>
+          <clipPath id="fieldClip"><rect x="6" y="10" width="88" height="140"/></clipPath>
+        </defs>
+        <rect x="0" y="0" width="100" height="160" fill="#0b1220"/>
+        <g id="turf" clip-path="url(#fieldClip)"></g>
+        <g id="markings" fill="none" stroke="#fff" stroke-width=".6" stroke-linecap="round">
+          <rect x="6" y="10" width="88" height="140"/>
+          <line x1="6" y1="80" x2="94" y2="80"/>
+          <circle cx="50" cy="80" r="9"/>
+          <circle cx="50" cy="80" r=".8" fill="#fff"/>
+          <path d="M32 10 A18 18 0 0 0 68 10"/>
+          <path d="M32 150 A18 18 0 0 1 68 150"/>
+          <circle cx="50" cy="28" r=".8" fill="#fff"/>
+          <circle cx="50" cy="132" r=".8" fill="#fff"/>
+          <path d="M6 12.5 A2.5 2.5 0 0 0 8.5 10"/>
+          <path d="M91.5 10 A2.5 2.5 0 0 0 94 12.5"/>
+          <path d="M6 147.5 A2.5 2.5 0 0 1 8.5 150"/>
+          <path d="M91.5 150 A2.5 2.5 0 0 1 94 147.5"/>
+          <rect x="43" y="5" width="14" height="5" stroke-width=".8"/>
+          <rect x="43" y="150" width="14" height="5" stroke-width=".8"/>
+        </g>
+        <g id="grid" stroke="rgba(255,255,255,.18)" stroke-width=".25" style="display:none" pointer-events="none"></g>
+        <g id="ghosts"></g>
+        <g id="moves" fill="none" stroke="#e2e8f0" stroke-width=".4" stroke-dasharray="1.4 1" pointer-events="none"></g>
+        <g id="arrows" fill="none" stroke="#fbbf24" stroke-width=".6" pointer-events="none"></g>
+        <g id="tokens"></g>
+        <g id="ball" data-ball="1">
+          <circle r="4" fill="transparent"/>
+          <circle r="1.9" fill="#fff" stroke="#0f172a" stroke-width=".5"/>
+          <path d="M-.9 -.4 L0 -1.1 L.9 -.4 L.55 .7 L-.55 .7 z" fill="#0f172a"/>
+        </g>
+      </svg>
+    </div>
+    <div class="controls">
+      <div class="group" role="group" data-i18n-aria="phasesLabel" aria-label="Phases" id="phaseBtns"></div>
+      <div class="sep"></div>
+      <div class="group">
+        <button class="btn primary" id="btnPlay" type="button"></button>
+        <button class="btn" id="btnPause" type="button"></button>
+        <button class="btn" id="btnReset" type="button"></button>
+        <select class="btn" id="speed" data-i18n-aria="speed" aria-label="Playback speed">
+          <option value="0.5">0.5x</option><option value="1" selected>1x</option><option value="2">2x</option>
+        </select>
+        <button class="btn" id="btnGrid" type="button" aria-pressed="false"></button>
+        <button class="btn" id="btnSnap" type="button" aria-pressed="false"></button>
+      </div>
+    </div>
+  </section>
+
+  <aside class="card" data-i18n-aria="panelLabel" aria-label="Tactical panel">
+    <div class="tabs" role="tablist">
+      <button class="tab" role="tab" id="tab-formation" aria-controls="panel-formation" aria-selected="true" type="button" data-i18n="tabFormation">Formation</button>
+      <button class="tab" role="tab" id="tab-roster" aria-controls="panel-roster" aria-selected="false" type="button" data-i18n="tabRoster">Roster</button>
+      <button class="tab" role="tab" id="tab-guide" aria-controls="panel-guide" aria-selected="false" type="button" data-i18n="tabGuide">Phase Guide</button>
+    </div>
+    <div class="tabpanel" role="tabpanel" id="panel-formation" aria-labelledby="tab-formation"></div>
+    <div class="tabpanel" role="tabpanel" id="panel-roster" aria-labelledby="tab-roster" hidden></div>
+    <div class="tabpanel" role="tabpanel" id="panel-guide" aria-labelledby="tab-guide" hidden></div>
+  </aside>
+</main>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
